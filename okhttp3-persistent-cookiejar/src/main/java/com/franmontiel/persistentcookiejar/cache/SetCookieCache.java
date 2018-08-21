@@ -17,9 +17,11 @@
 package com.franmontiel.persistentcookiejar.cache;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.Cookie;
 
@@ -28,7 +30,7 @@ public class SetCookieCache implements CookieCache {
     private Set<IdentifiableCookie> cookies;
 
     public SetCookieCache() {
-        cookies = new HashSet<>();
+        cookies = Collections.newSetFromMap(new ConcurrentHashMap<IdentifiableCookie, Boolean>());
     }
 
     @Override
@@ -53,7 +55,7 @@ public class SetCookieCache implements CookieCache {
 
         private Iterator<IdentifiableCookie> iterator;
 
-        public SetCookieCacheIterator() {
+        SetCookieCacheIterator() {
             iterator = cookies.iterator();
         }
 

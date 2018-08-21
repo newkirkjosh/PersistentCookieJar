@@ -46,14 +46,17 @@ public class SharedPrefsCookiePersistor implements CookiePersistor {
 
         for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet()) {
             String serializedCookie = (String) entry.getValue();
-            Cookie cookie = new SerializableCookie().decode(serializedCookie);
-            if (cookie != null) {
-                cookies.add(cookie);
+            if (serializedCookie != null) {
+                Cookie cookie = new SerializableCookie().decode(serializedCookie);
+                if (cookie != null) {
+                    cookies.add(cookie);
+                }
             }
         }
         return cookies;
     }
 
+    @SuppressLint("ApplySharedPref")
     @Override
     public void saveAll(Collection<Cookie> cookies) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -63,6 +66,7 @@ public class SharedPrefsCookiePersistor implements CookiePersistor {
         editor.commit();
     }
 
+    @SuppressLint("ApplySharedPref")
     @Override
     public void removeAll(Collection<Cookie> cookies) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -76,6 +80,7 @@ public class SharedPrefsCookiePersistor implements CookiePersistor {
         return (cookie.secure() ? "https" : "http") + "://" + cookie.domain() + cookie.path() + "|" + cookie.name();
     }
 
+    @SuppressLint("ApplySharedPref")
     @Override
     public void clear() {
         sharedPreferences.edit().clear().commit();

@@ -16,6 +16,7 @@
 
 package com.franmontiel.persistentcookiejar.persistence;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
@@ -27,6 +28,7 @@ import java.io.Serializable;
 
 import okhttp3.Cookie;
 
+@SuppressLint("LogNotTimber")
 public class SerializableCookie implements Serializable {
     private static final String TAG = SerializableCookie.class.getSimpleName();
 
