@@ -68,7 +68,7 @@ public class SharedPrefsCookiePersistorTest {
     public void clear_ShouldClearAllCookies() throws Exception {
         Cookie cookie = TestCookieCreator.createPersistentCookie(false);
         persistor.saveAll(Collections.singletonList(cookie));
-
+        
         persistor.clear();
 
         assertTrue(persistor.loadAll().isEmpty());
